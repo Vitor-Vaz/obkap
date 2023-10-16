@@ -1,8 +1,8 @@
 import Config
 
 config :obkap, Obkap.Repo,
-  username: "obkap_user",
-  password: "obkap_password",
+  username: "postgres",
+  password: "postgres",
   database: "obkap_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

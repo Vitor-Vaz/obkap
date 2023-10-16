@@ -1,24 +1,25 @@
-version: "3.8"
+version: "3"
+
 services:
-  postgres:
+  database:
     image: postgres:13.1-alpine
     environment:
-      POSTGRES_USER:  
-      POSTGRES_PASSWORD: postgres
-      PGDATA: /var/lib/postgresql/data
+      - POSTGRES_DB=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
       - database:/var/lib/postgresql/data
     ports:
       - 5432:5432
   zookeeper:
     image: confluentinc/cp-zookeeper:4.1.1
-    hostname: zookeper
+    hostname: zookeper 
     ports:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-
+  
   kafka:
     image: confluentinc/cp-kafka:4.1.1
     hostname: kafka
@@ -31,7 +32,5 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  dockerize:
-    image: jwilder/dockerize
 volumes:
   database:
