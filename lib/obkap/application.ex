@@ -3,12 +3,15 @@ defmodule Obkap.Application do
 
   use Application
 
+  alias Obkap.Kafka.Consumer
+
   def start(_type, _args) do
     children = [
       Obkap.Repo,
       ObkapWeb.Telemetry,
       {Phoenix.PubSub, name: Obkap.PubSub},
-      ObkapWeb.Endpoint
+      ObkapWeb.Endpoint,
+      Consumer
     ]
 
     opts = [strategy: :one_for_one, name: Obkap.Supervisor]
